@@ -1,22 +1,16 @@
 .gallery-images {
-    flex-basis: 100%;
-    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 }
 
 img {
     object-fit: cover;
     object-position: 40%;
     width: 100%;
-    height: calc(100vh - 10rem);
-}
-
-a {
-    display: block;
-    margin: 0 2rem 0 2rem;
-    filter: grayscale(100%);
-    opacity: 80%;
-    /* try without it, we want the scale to be contained inside anchor tag */
-    overflow: hidden;
+    height: 100%;
 }
 
 /* a:focus for mobile */
@@ -32,26 +26,33 @@ img:hover {
     transition: transform 1s ease-in-out;
 }
 
-/* Small devices (landscape phones, 576px) */
-@media screen and (max-width: 576px) {
-    img {
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (min-width: 576px) {
+    a {
         width: 100%;
         height: auto;
     }
+}
 
+/* Medium devices (tablets, 768px and up) */
+@media screen and (min-width: 768px) {
     a {
-        margin: 2rem 0 2rem 0;
+        width: calc(100% / 3);
+        height: auto;
+        margin: 0 1rem 2rem;
     }
 }
 
-/* Medium devices (tablets, 768px) */
-@media screen and (max-width: 768px) {
-    /* TODO */
-}
-
-/* Large devices (desktops, 992px) */
-@media screen and (max-width: 992px) {
+/* Large devices (desktops, 992px and up) */
+@media screen and (min-width: 992px) {
     a {
-        margin: 2rem 0 2rem 0;
+        display: block;
+        margin: 0 2rem 2rem 2rem;
+        width: calc(100% / 9);
+        height: calc(100vh - 10rem);
+        filter: grayscale(100%);
+        opacity: 80%;
+        /* try without it, we want the scale to be contained inside anchor tag */
+        overflow: hidden;
     }
 }
