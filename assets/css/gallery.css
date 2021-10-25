@@ -1,8 +1,3 @@
-.gallery-images {
-    flex-basis: 100%;
-    flex: 1;
-}
-
 img {
     object-fit: cover;
     object-position: 40%;
