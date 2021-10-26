@@ -31,6 +31,9 @@ img:hover {
     a {
         width: 100%;
         height: auto;
+        margin-bottom: 2rem;
+        filter: grayscale(100%);
+        opacity: 80%;
     }
 }
 
@@ -40,6 +43,8 @@ img:hover {
         width: calc(100% / 3);
         height: auto;
         margin: 0 1rem 2rem;
+        filter: grayscale(100%);
+        opacity: 80%;
     }
 }
 
