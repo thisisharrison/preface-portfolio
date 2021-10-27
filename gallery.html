@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <!-- Google Font -->
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap");
@@ -25,12 +26,41 @@
         <!-- Generic styling -->
         <link href="assets/css/index.css" rel="stylesheet" />
         <!-- Page specific styling -->
-        <link href="assets/css/card.css" rel="stylesheet" />
-        <title>Business Card | Portfolio</title>
+        <link href="assets/css/gallery.css" rel="stylesheet" />
+        <title>Gallery | Portfolio</title>
     </head>
     <body>
-        <div class="flip-card">
-            <!-- TODO -->
-        </div>
+        <!-- Tip: Use emmet to generate html, eg: section>h1+div+div>(a>img)*6 -->
+        <section class="container mt-5">
+            <h1 class="text-center">Gallery</h1>
+
+            <div class="border mb-5"></div>
+
+            <div class="gallery-images d-flex flex-wrap flex-lg-nowrap flex-sm-column flex-lg-row justify-content-center">
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+
+                <a href="#">
+                    <img src="assets/image/sf.jpeg" />
+                </a>
+            </div>
+        </section>
     </body>
 </html>
