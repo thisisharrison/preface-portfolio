@@ -2,10 +2,10 @@ img {
     object-fit: cover;
     object-position: 40%;
     width: 100%;
-    height: calc(100vh - 10rem);
+    height: calc(100vh - 13.5rem);
 }
 
-a {
+.gallery-images a {
     display: block;
     margin: 0 2rem 0 2rem;
     filter: grayscale(100%);
@@ -15,8 +15,8 @@ a {
 }
 
 /* a:focus for mobile */
-a:hover,
-a:focus {
+.gallery-images a:hover,
+.gallery-images a:focus {
     filter: grayscale(0);
     opacity: 100%;
     transition: all 0.5s ease-in-out;
@@ -34,7 +34,7 @@ img:hover {
         height: auto;
     }
 
-    a {
+    .gallery-images a {
         margin: 2rem 0 2rem 0;
     }
 }
@@ -46,7 +46,7 @@ img:hover {
 
 /* Large devices (desktops, 992px) */
 @media screen and (max-width: 992px) {
-    a {
+    .gallery-images a {
         margin: 2rem 0 2rem 0;
     }
 }
