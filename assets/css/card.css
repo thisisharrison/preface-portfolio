@@ -62,6 +62,11 @@
     transform: rotateY(180deg);
 }
 
+/* card on mobile */
+.flip-card:focus .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
 /* Image sizing */
 #front-logo {
     max-width: 60%;
