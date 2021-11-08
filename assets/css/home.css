@@ -1,0 +1,51 @@
+body {
+    background-image: url("../image/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top 0% bottom -50%;
+    /* how to move the background relative to viewport */
+    background-attachment: fixed;
+}
+
+img {
+    width: 15rem;
+}
+
+.social-media i {
+    color: grey;
+}
+
+.social-media a:hover i {
+    color: pink;
+}
+
+.home-page-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.home-page-footer ul {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.home-page-footer a {
+    color: grey;
+}
+
+/* Full Screen Height when on smaller devices */
+@media screen and (max-width: 992px) {
+    body {
+        background-position: 30% 0%;
+        background-size: auto 100vh;
+    }
+
+    .home-page-footer ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

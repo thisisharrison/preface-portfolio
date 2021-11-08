@@ -12,6 +12,10 @@ h1 {
     font-family: "Montserrat", sans-serif;
 }
 
+.nav-link:hover {
+    color: pink !important;
+}
+
 .nav-item.active {
     font-weight: 600;
 }
