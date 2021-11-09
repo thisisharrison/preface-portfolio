@@ -39,6 +39,7 @@ img {
 @media screen and (max-width: 992px) {
     body {
         background-position: 30% 0%;
+        background-attachment: fixed;
         background-size: auto 100vh;
     }
 
@@ -47,5 +48,7 @@ img {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        /* height set to 0 otherwise background does not cover the ul */
+        height: 0;
     }
 }
