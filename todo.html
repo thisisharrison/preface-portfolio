@@ -20,15 +20,40 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/100c2b6a18.js" crossorigin="anonymous"></script>
 
+        <link rel="stylesheet" href="./assets/css/index.css" />
+
         <title>To-Do List</title>
     </head>
     <body>
-        <div class="container">
-            <h1>TO-DO LIST</h1>
+        <!-- Bootstrap Nav -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="card.html">Business Card</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="todo.html">To-do List</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-            <button id="new-task" class="btn btn-primary">New Task</button>
+        <div class="container d-flex justify-content-center flex-column">
+            <h1 class="align-self-center">TO-DO LIST</h1>
 
-            <form id="new-task-form">
+            <button id="new-task" class="btn btn-primary align-self-center">New Task</button>
+
+            <form id="new-task-form" class="mt-4" style="display: none">
                 <div class="form-group">
                     <label for="task">Task</label>
                     <input type="text" id="task" placeholder="Type task here" class="form-control" />
@@ -44,90 +69,86 @@
                     <input type="text" id="description" placeholder="Type description here" class="form-control" />
                 </div>
 
-                <input type="submit" value="Submit" class="btn btn-success" />
+                <input type="submit" value="Submit" class="btn btn-success mt-4" />
             </form>
+
+            <!-- Start with nothing at first -->
+            <div id="task-list" class="row m-4"></div>
         </div>
 
-        <!-- Start with nothing at first -->
-        <ul id="task-list"></ul>
-
-        <!-- We want to show the tasks this way, but do it programmatically -->
-        <!-- <ul>
-            <li>
-                <div>
-                    <h3>Task Name</h3>
-                    <p>Description</p>
-                    <p>Progress in %</p>
-                </div>
-            </li>
-
-            <li>
-                <div>
-                    <h3>Task Name</h3>
-                    <p>Description</p>
-                    <p>Progress in %</p>
-                </div>
-            </li>
-        </ul> -->
-
         <script>
-            // Form Submit
-            const taskForm = document.querySelector("#new-task-form");
-            taskForm.addEventListener("submit", handleSubmit);
-            function handleSubmit(event) {
-                event.preventDefault();
-                let taskValue = document.querySelector("#task").value;
-                let progressValue = document.querySelector("#progress").value;
-                let descValue = document.querySelector("#description").value;
-                if (taskValue === "" || progressValue === "" || descValue === "") {
-                    alert("Can't have empty value");
-                    return;
+            // add event listener for when DOMContent is loaded. Otherwise these elements we're querying may not be ready!
+            document.addEventListener("DOMContentLoaded", () => {
+                // Form Submit
+                const taskForm = document.querySelector("#new-task-form");
+                taskForm.addEventListener("submit", handleSubmit);
+                function handleSubmit(event) {
+                    event.preventDefault();
+                    let taskValue = document.querySelector("#task").value;
+                    let progressValue = document.querySelector("#progress").value;
+                    let descValue = document.querySelector("#description").value;
+                    if (taskValue === "" || progressValue === "" || descValue === "") {
+                        alert("Can't have empty value");
+                        return;
+                    }
+                    if (parseInt(progressValue) > 100 || parseInt(progressValue) < 0) {
+                        alert("Progress must be within 0 to 100");
+                        return;
+                    }
+                    addTodo({
+                        task: taskValue,
+                        progress: progressValue,
+                        description: descValue,
+                    });
+                    document.querySelector("#task").value = "";
+                    document.querySelector("#progress").value = "";
+                    document.querySelector("#description").value = "";
                 }
-                if (parseInt(progressValue) > 100 || parseInt(progressValue) < 0) {
-                    alert("Progress must be within 0 to 100");
-                    return;
-                }
-                // To do that we need to:
-                // Create function to create <ul> if not created before, create <li> and the inside <div> with all the information
-                // Then append this to the <ul>
-                addTodo({
-                    task: taskValue,
-                    progress: progressValue,
-                    description: descValue,
-                });
-                document.querySelector("#task").value = "";
-                document.querySelector("#progress").value = "";
-                document.querySelector("#description").value = "";
-            }
 
-            // Data is an object. very often that's how frontend will return information to server
-            function addTodo(data) {
-                const taskList = document.getElementById("task-list");
-                const task = `
-                    <li>
-                        <div>
-                            <h3>${data.task}</h3>
-                            <p>${data.description}</p>
-                            <p>${data.progress}</p>
+                function addTodo({ task, progress, description }) {
+                    const taskList = document.getElementById("task-list");
+                    const card = `
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <div class="card">
+    
+                                <div class="card-header px-4 pt-4">
+                                    <div class="card-actions float-right">
+                                    </div>
+                                    <h5 class="card-title mb-0">${task}</h5>
+                                    <div class="badge ${progress == 100 ? "bg-success" : "bg-warning"} my-2">${progress == 100 ? "Finished" : "In progress"}</div>
+                                </div>
+                                <div class="card-body px-4 pt-2">
+                                    <p>${description}</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item px-4 pb-4">
+                                        <p class="mb-2 font-weight-bold">Progress <span class="float-right">${parseInt(progress)}%</span></p>
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100" style="width: ${progress}%;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </li>
-                `;
-                taskList.innerHTML += task;
-            }
-
-            // New Form button
-            const taskButton = document.getElementById("new-task");
-            taskForm.style.display = "none";
-            taskButton.onclick = toggleTask;
-            function toggleTask() {
-                if (taskButton.innerText === "New Task") {
-                    taskButton.innerText = "Close Task";
-                    taskForm.style.display = "";
-                } else {
-                    taskButton.innerText = "New Task";
-                    taskForm.style.display = "none";
+                    `;
+                    taskList.innerHTML += card;
                 }
-            }
+
+                // New Form button
+                const taskButton = document.getElementById("new-task");
+                taskForm.style.display = "none";
+                taskButton.onclick = toggleTask;
+                function toggleTask() {
+                    if (taskButton.innerText === "New Task") {
+                        taskButton.innerText = "Close Task";
+                        taskForm.style.display = "";
+                    } else {
+                        taskButton.innerText = "New Task";
+                        taskForm.style.display = "none";
+                    }
+                }
+            });
         </script>
         <!-- Copy JS from Bootstrap and add to bottom of body -->
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
