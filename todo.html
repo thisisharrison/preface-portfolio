@@ -9,10 +9,8 @@
     <body>
         <h1>TO-DO LIST</h1>
 
-        <!-- 4. Adding an onclick event listener and call (so we need `()`) the function we created -->
         <button id="new-task">New Task</button>
 
-        <!-- 5. Add ID for query -->
         <form id="new-task-form">
             <label for="task">Task</label>
             <input type="text" id="task" placeholder="Type task here" />
@@ -27,33 +25,48 @@
         </form>
 
         <script>
-            // 1. Toggle the New Task Button using DOM query and innerText
-            // Both works:
-            // document.querySelector("#new-task");
-            const taskButton = document.getElementById("new-task");
-
-            // 2. we can save variables to the window object for debugging
-            window.taskButton = taskButton;
-
             const taskForm = document.querySelector("#new-task-form");
-            // We should probably add CSS to make the form hidden from the start
-            // And we can't do this in style tag because then it'll always be hidden
+            // what's appropriate event handler name for form submit?
+            taskForm.addEventListener("submit", handleSubmit);
+
+            // what should handle submit do? validate and then console.log form (for now)
+            // first time seeing `event`: every event listener has this argument
+            function handleSubmit(event) {
+                // we don't like that it reloads our page. so prevent that
+                event.preventDefault();
+                // get the values on submission
+                let taskValue = document.querySelector("#task").value;
+                let progressValue = document.querySelector("#progress").value;
+                let descValue = document.querySelector("#description").value;
+                // we want to validate
+                if (taskValue === "" || progressValue === "" || descValue === "") {
+                    alert("Can't have empty value");
+                    // don't finish the rest of the function
+                    return;
+                }
+                // check type
+                if (parseInt(progressValue) > 100 || parseInt(progressValue) < 0) {
+                    alert("Progress must be within 0 to 100");
+                    return;
+                }
+                // console log the data (for now)
+                console.log({
+                    task: taskValue,
+                    progress: progressValue,
+                    description: descValue,
+                });
+                // clear inputs
+                document.querySelector("#task").value = "";
+                document.querySelector("#progress").value = "";
+                document.querySelector("#description").value = "";
+            }
+
+            const taskButton = document.getElementById("new-task");
             taskForm.style.display = "none";
-
-            // Method 2
-            // `DOMElement`.addEventListener(`event type`, function) // function can be arrow or function name
-            // taskButton.addEventListener("click", toggleTask);
-
-            // Method 3
-            // `DOMElement.`event type` = function // can be function or arrow function
             taskButton.onclick = toggleTask;
-
-            // 3. create a function to change innerText
             function toggleTask() {
                 if (taskButton.innerText === "New Task") {
                     taskButton.innerText = "Close Task";
-                    // 5. Let's show the form when we click `New Task`
-                    // Aside from innerText, we can set CSS properties
                     taskForm.style.display = "";
                 } else {
                     taskButton.innerText = "New Task";
