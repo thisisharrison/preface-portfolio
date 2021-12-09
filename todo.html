@@ -9,26 +9,49 @@
     <body>
         <h1>TO-DO LIST</h1>
 
-        <!-- First time using Form and Input tags -->
-        <form>
-            <!-- for -> some id -->
+        <!-- 4. Adding an onclick event listener and call (so we need `()`) the function we created -->
+        <button id="new-task" onclick="toggleTask()">New Task</button>
+
+        <!-- 5. Add ID for query -->
+        <form id="new-task-form">
             <label for="task">Task</label>
-            <!-- type -> just text here -->
             <input type="text" id="task" placeholder="Type task here" />
 
             <label for="progress">Progress</label>
-            <!-- try another input type -->
             <input type="number" id="progress" placeholder="Type progress here in digit" />
 
             <label for="description">Description</label>
             <input type="text" id="description" placeholder="Type description here" />
 
-            <!-- Explore these two usage -->
-            <!-- Both "submit" to the server -->
-            <!-- Difference is button can have content, input cannot -->
-            <!-- For example cannot add a submit icon or image -->
             <input type="submit" value="Submit" />
-            <button type="submit">Submit</button>
         </form>
+
+        <script>
+            // 1. Toggle the New Task Button using DOM query and innerText
+            // Both works:
+            // document.querySelector("#new-task");
+            const taskButton = document.getElementById("new-task");
+
+            // 2. we can save variables to the window object for debugging
+            window.taskButton = taskButton;
+
+            const taskForm = document.querySelector("#new-task-form");
+            // We should probably add CSS to make the form hidden from the start
+            // And we can't do this in style tag because then it'll always be hidden
+            // taskForm.style.display = "none";
+
+            // 3. create a function to change innerText
+            function toggleTask() {
+                if (taskButton.innerText === "New Task") {
+                    taskButton.innerText = "Close Task";
+                    // 5. Let's show the form when we click `New Task`
+                    // Aside from innerText, we can set CSS properties
+                    taskForm.style.display = "";
+                } else {
+                    taskButton.innerText = "New Task";
+                    taskForm.style.display = "none";
+                }
+            }
+        </script>
     </body>
 </html>
