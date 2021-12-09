@@ -24,32 +24,45 @@
             <input type="submit" value="Submit" />
         </form>
 
-        <script>
-            const taskForm = document.querySelector("#new-task-form");
-            // what's appropriate event handler name for form submit?
-            taskForm.addEventListener("submit", handleSubmit);
+        <!-- We want to show the tasks this way, but do it programmatically -->
+        <ul>
+            <li>
+                <div>
+                    <h3>Task Name</h3>
+                    <p>Description</p>
+                    <p>Progress in %</p>
+                </div>
+            </li>
 
-            // what should handle submit do? validate and then console.log form (for now)
-            // first time seeing `event`: every event listener has this argument
+            <li>
+                <div>
+                    <h3>Task Name</h3>
+                    <p>Description</p>
+                    <p>Progress in %</p>
+                </div>
+            </li>
+        </ul>
+
+        <script>
+            // Form Submit
+            const taskForm = document.querySelector("#new-task-form");
+            taskForm.addEventListener("submit", handleSubmit);
             function handleSubmit(event) {
-                // we don't like that it reloads our page. so prevent that
                 event.preventDefault();
-                // get the values on submission
                 let taskValue = document.querySelector("#task").value;
                 let progressValue = document.querySelector("#progress").value;
                 let descValue = document.querySelector("#description").value;
-                // we want to validate
                 if (taskValue === "" || progressValue === "" || descValue === "") {
                     alert("Can't have empty value");
-                    // don't finish the rest of the function
                     return;
                 }
-                // check type
                 if (parseInt(progressValue) > 100 || parseInt(progressValue) < 0) {
                     alert("Progress must be within 0 to 100");
                     return;
                 }
-                // console log the data (for now)
+                // To do that we need to:
+                // Create function to create <ul> if not created before, create <li> and the inside <div> with all the information
+                // Then append this to the <ul>
                 console.log({
                     task: taskValue,
                     progress: progressValue,
@@ -61,6 +74,7 @@
                 document.querySelector("#description").value = "";
             }
 
+            // New Form button
             const taskButton = document.getElementById("new-task");
             taskForm.style.display = "none";
             taskButton.onclick = toggleTask;
