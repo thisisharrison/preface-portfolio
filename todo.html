@@ -10,7 +10,7 @@
         <h1>TO-DO LIST</h1>
 
         <!-- 4. Adding an onclick event listener and call (so we need `()`) the function we created -->
-        <button id="new-task" onclick="toggleTask()">New Task</button>
+        <button id="new-task">New Task</button>
 
         <!-- 5. Add ID for query -->
         <form id="new-task-form">
@@ -38,7 +38,15 @@
             const taskForm = document.querySelector("#new-task-form");
             // We should probably add CSS to make the form hidden from the start
             // And we can't do this in style tag because then it'll always be hidden
-            // taskForm.style.display = "none";
+            taskForm.style.display = "none";
+
+            // Method 2
+            // `DOMElement`.addEventListener(`event type`, function) // function can be arrow or function name
+            // taskButton.addEventListener("click", toggleTask);
+
+            // Method 3
+            // `DOMElement.`event type` = function // can be function or arrow function
+            taskButton.onclick = toggleTask;
 
             // 3. create a function to change innerText
             function toggleTask() {
