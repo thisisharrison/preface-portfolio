@@ -4,63 +4,78 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Google Font -->
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap");
+        </style>
+
+        <!-- Bootstrap Styles and JavaScript (Although we don't need JS for this section)-->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
+
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/100c2b6a18.js" crossorigin="anonymous"></script>
+
         <title>To-Do List</title>
     </head>
     <body>
-        <h1>TO-DO LIST</h1>
+        <div class="container">
+            <h1>TO-DO LIST</h1>
 
-        <button id="new-task">New Task</button>
+            <button id="new-task" class="btn btn-primary">New Task</button>
 
-        <form id="new-task-form">
-            <label for="task">Task</label>
-            <input type="text" id="task" placeholder="Type task here" />
+            <form id="new-task-form">
+                <div class="form-group">
+                    <label for="task">Task</label>
+                    <input type="text" id="task" placeholder="Type task here" class="form-control" />
+                </div>
 
-            <label for="progress">Progress</label>
-            <input type="number" id="progress" placeholder="Type progress here in digit" />
+                <div class="form-group">
+                    <label for="progress">Progress</label>
+                    <input type="number" id="progress" placeholder="Type progress here in digit" class="form-control" />
+                </div>
 
-            <label for="description">Description</label>
-            <input type="text" id="description" placeholder="Type description here" />
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" placeholder="Type description here" class="form-control" />
+                </div>
 
-            <input type="submit" value="Submit" />
-        </form>
+                <input type="submit" value="Submit" class="btn btn-success" />
+            </form>
+        </div>
 
         <script>
+            // Task Submission
             const taskForm = document.querySelector("#new-task-form");
-            // what's appropriate event handler name for form submit?
             taskForm.addEventListener("submit", handleSubmit);
-
-            // what should handle submit do? validate and then console.log form (for now)
-            // first time seeing `event`: every event listener has this argument
             function handleSubmit(event) {
-                // we don't like that it reloads our page. so prevent that
                 event.preventDefault();
-                // get the values on submission
                 let taskValue = document.querySelector("#task").value;
                 let progressValue = document.querySelector("#progress").value;
                 let descValue = document.querySelector("#description").value;
-                // we want to validate
                 if (taskValue === "" || progressValue === "" || descValue === "") {
                     alert("Can't have empty value");
-                    // don't finish the rest of the function
                     return;
                 }
-                // check type
                 if (parseInt(progressValue) > 100 || parseInt(progressValue) < 0) {
                     alert("Progress must be within 0 to 100");
                     return;
                 }
-                // console log the data (for now)
                 console.log({
                     task: taskValue,
                     progress: progressValue,
                     description: descValue,
                 });
-                // clear inputs
                 document.querySelector("#task").value = "";
                 document.querySelector("#progress").value = "";
                 document.querySelector("#description").value = "";
             }
 
+            // Toggle Task Form
             const taskButton = document.getElementById("new-task");
             taskForm.style.display = "none";
             taskButton.onclick = toggleTask;
@@ -74,5 +89,17 @@
                 }
             }
         </script>
+        <!-- Copy JS from Bootstrap and add to bottom of body -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>
