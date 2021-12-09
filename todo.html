@@ -24,8 +24,11 @@
             <input type="submit" value="Submit" />
         </form>
 
+        <!-- Start with nothing at first -->
+        <ul id="task-list"></ul>
+
         <!-- We want to show the tasks this way, but do it programmatically -->
-        <ul>
+        <!-- <ul>
             <li>
                 <div>
                     <h3>Task Name</h3>
@@ -41,7 +44,7 @@
                     <p>Progress in %</p>
                 </div>
             </li>
-        </ul>
+        </ul> -->
 
         <script>
             // Form Submit
@@ -63,7 +66,7 @@
                 // To do that we need to:
                 // Create function to create <ul> if not created before, create <li> and the inside <div> with all the information
                 // Then append this to the <ul>
-                console.log({
+                addTodo({
                     task: taskValue,
                     progress: progressValue,
                     description: descValue,
@@ -72,6 +75,21 @@
                 document.querySelector("#task").value = "";
                 document.querySelector("#progress").value = "";
                 document.querySelector("#description").value = "";
+            }
+
+            // Data is an object. very often that's how frontend will return information to server
+            function addTodo(data) {
+                const taskList = document.getElementById("task-list");
+                const task = `
+                    <li>
+                        <div>
+                            <h3>${data.task}</h3>
+                            <p>${data.description}</p>
+                            <p>${data.progress}</p>
+                        </div>
+                    </li>
+                `;
+                taskList.innerHTML += task;
             }
 
             // New Form button
