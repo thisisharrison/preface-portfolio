@@ -130,6 +130,7 @@
 -   Refer to [koans](https://github.com/thisisharrison/preface-koans) for more JS notes.
 
 -   Homework exercise
+    -   [https://edabit.com/challenges/javascript](https://edabit.com/challenges/javascript)
     -   [https://www.codewars.com/collections/javascript-basics-2](https://www.codewars.com/collections/javascript-basics-2)
     -   These can also be quite tough:
         -   [https://www.hackerrank.com/challenges/js10-hello-world/problem?isFullScreen=true](https://www.hackerrank.com/challenges/js10-hello-world/problem?isFullScreen=true)
